@@ -35,10 +35,12 @@ display:flex;
 justify-content:center;
 align-items:center;
 z-index:9999;
+text-align:center;
+padding:20px;
 }
 
 #intro h1{
-font-size:60px;
+font-size:40px;
 letter-spacing:6px;
 
 background:linear-gradient(90deg,#d4a54a,#b47b2e,#d4a54a);
@@ -60,19 +62,36 @@ animation:shine 4s infinite;
 
 .hero{
 text-align:center;
-padding:120px 20px;
+padding:90px 20px;
 }
 
 .logo{
-width:110px;
+width:100px;
 margin-bottom:20px;
 border-radius:50%;
 box-shadow:0 0 25px #d4a54a66;
 }
 
 .hero h2{
-font-size:46px;
+font-size:38px;
 font-weight:800;
+}
+
+.tagline{
+margin-top:10px;
+color:#d4a54a;
+font-size:14px;
+letter-spacing:3px;
+}
+
+.quote{
+margin-top:18px;
+font-size:13px;
+opacity:.75;
+max-width:400px;
+margin-left:auto;
+margin-right:auto;
+line-height:1.6;
 }
 
 .join-btn{
@@ -100,38 +119,39 @@ box-shadow:0 10px 30px rgba(212,165,74,0.4);
 .countdown{
 display:flex;
 justify-content:center;
-gap:15px;
+gap:10px;
 margin-top:35px;
 flex-wrap:wrap;
 }
 
 .box{
 background:#120d07;
-padding:18px 24px;
-border-radius:12px;
+padding:16px 18px;
+border-radius:10px;
 border:1px solid #ffffff14;
+font-size:13px;
 }
 
 /* SECTION */
 
 .section{
-max-width:850px;
+max-width:700px;
 margin:auto;
-padding:70px 20px;
+padding:60px 20px;
 }
 
 .section h3{
-margin-bottom:25px;
-font-size:24px;
+margin-bottom:22px;
+font-size:22px;
 color:#d4a54a;
 }
 
-/* PREMIUM LINK BUTTONS */
+/* BUTTONS */
 
 .links{
 display:flex;
 flex-direction:column;
-gap:16px;
+gap:14px;
 }
 
 .link-btn{
@@ -140,9 +160,9 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 
-padding:18px 24px;
+padding:16px 20px;
 
-border-radius:50px;
+border-radius:40px;
 
 background:linear-gradient(145deg,#1f1509,#120d07);
 
@@ -154,22 +174,19 @@ color:white;
 
 font-weight:500;
 
-transition:all .35s ease;
+transition:.3s;
 
 }
 
 .link-btn span{
 color:#d4a54a;
-font-weight:600;
 }
 
 .link-btn:hover{
 
-transform:translateY(-4px) scale(1.02);
+transform:translateY(-3px);
 
-box-shadow:0 12px 35px rgba(212,165,74,0.35);
-
-background:linear-gradient(145deg,#2a1b0d,#160f08);
+box-shadow:0 12px 30px rgba(212,165,74,0.35);
 
 }
 
@@ -177,13 +194,33 @@ background:linear-gradient(145deg,#2a1b0d,#160f08);
 
 footer{
 text-align:center;
-padding:50px;
+padding:50px 20px;
 opacity:.7;
+font-size:14px;
 }
 
 footer a{
 color:#d4a54a;
 text-decoration:none;
+}
+
+/* MOBILE FIX */
+
+@media(max-width:600px){
+
+.hero h2{
+font-size:30px;
+}
+
+#intro h1{
+font-size:28px;
+letter-spacing:3px;
+}
+
+.box{
+font-size:12px;
+}
+
 }
 
 </style>
@@ -201,15 +238,29 @@ text-decoration:none;
 
 <h2>The OG Association</h2>
 
-<a class="join-btn" href="https://t.me/ArjunaFriendsOG">Join Telegram</a>
+<div class="tagline">
+DISCIPLINE • FOCUS • CONSISTENCY
+</div>
+
+<div class="quote" id="quote"></div>
+
+<a class="join-btn" href="https://t.me/ArjunaFriendsOG">
+Join Telegram
+</a>
 
 <div class="countdown">
 
-<div class="box">NEET 2027<br><span id="neet"></span></div>
+<div class="box">
+NEET 2027<br><span id="neet"></span>
+</div>
 
-<div class="box">JEE MAIN 2027<br><span id="main"></span></div>
+<div class="box">
+JEE MAIN 2027<br><span id="main"></span>
+</div>
 
-<div class="box">JEE ADV 2027<br><span id="adv"></span></div>
+<div class="box">
+JEE ADV 2027<br><span id="adv"></span>
+</div>
 
 </div>
 
@@ -222,23 +273,19 @@ text-decoration:none;
 <div class="links">
 
 <a class="link-btn" href="https://t.me/ArjunaFriendsOG">
-Lakshya Main
-<span>Join →</span>
+Lakshya Main <span>Join →</span>
 </a>
 
 <a class="link-btn" href="https://t.me/ArjunaFriendsGroupQuizzer">
-OG Quizzer
-<span>Join →</span>
+OG Quizzer <span>Join →</span>
 </a>
 
 <a class="link-btn" href="https://t.me/AZQuizzes">
-Collab Quizzer
-<span>Join →</span>
+Collab Quizzer <span>Join →</span>
 </a>
 
 <a class="link-btn" href="https://t.me/ArjunaResourceOG">
-Study Materials
-<span>Join →</span>
+Study Materials <span>Join →</span>
 </a>
 
 </div>
@@ -252,28 +299,23 @@ Study Materials
 <div class="links">
 
 <a class="link-btn" href="https://link.yeolpumta.com/P3R5cGU9Z3JvdXBJbnZpdGUmaWQ9NDg5NTg4MQ==">
-YPT Main
-<span>Join →</span>
+YPT Main <span>Join →</span>
 </a>
 
 <a class="link-btn" href="https://link.yeolpumta.com/P3R5cGU9Z3JvdXBJbnZpdGUmaWQ9NTE3MTg3MQ==">
-YPT 1X
-<span>Join →</span>
+YPT 1X <span>Join →</span>
 </a>
 
 <a class="link-btn" href="https://link.yeolpumta.com/P3R5cGU9Z3JvdXBJbnZpdGUmaWQ9NTM2MzgyNQ==">
-YPT 2X
-<span>Join →</span>
+YPT 2X <span>Join →</span>
 </a>
 
 <a class="link-btn" href="https://link.yeolpumta.com/P3R5cGU9Z3JvdXBJbnZpdGUmaWQ9NTQ0MTg3NA==">
-YPT 3X
-<span>Join →</span>
+YPT 3X <span>Join →</span>
 </a>
 
 <a class="link-btn" href="https://link.yeolpumta.com/P3R5cGU9Z3JvdXBJbnZpdGUmaWQ9NTc2NzAwOA==">
-YPT 4X
-<span>Join →</span>
+YPT 4X <span>Join →</span>
 </a>
 
 </div>
@@ -287,18 +329,15 @@ YPT 4X
 <div class="links">
 
 <a class="link-btn" href="https://discord.com/invite/KjbcgUGW6w">
-Discord
-<span>Open →</span>
+Discord <span>Open →</span>
 </a>
 
 <a class="link-btn" href="https://invite.regainapp.ai/joinInvite?group_id=e8893fdc-e9ec-4b1c-8a32-cb1029afa0a6&invited_by_user_id=11974460">
-Regain
-<span>Open →</span>
+Regain <span>Open →</span>
 </a>
 
 <a class="link-btn" href="https://focus-sigma-ruby.vercel.app/">
-Focus
-<span>Open →</span>
+Focus <span>Open →</span>
 </a>
 
 </div>
@@ -310,6 +349,8 @@ Made by <a href="https://portfolio-erenn.vercel.app/">EREN</a>
 </footer>
 
 <script>
+
+/* typing animation */
 
 const text="THE OG ASSOCIATION"
 
@@ -323,7 +364,7 @@ document.getElementById("type").innerHTML+=text.charAt(i)
 
 i++
 
-setTimeout(typing,80)
+setTimeout(typing,70)
 
 }
 
@@ -333,15 +374,32 @@ typing()
 
 setTimeout(()=>{
 
-document.getElementById("intro").style.opacity="0"
-
-setTimeout(()=>{
-
 document.getElementById("intro").style.display="none"
 
-},700)
+},3200)
 
-},3500)
+/* motivational quotes */
+
+const quotes=[
+
+"Success in NEET or JEE is not talent — it's consistency.",
+
+"Discipline beats motivation every single day.",
+
+"While others sleep, toppers revise.",
+
+"Small daily improvements create massive ranks.",
+
+"Your future rank is hidden inside today's study session.",
+
+"Focus on chapters, not distractions.",
+
+"Pain of discipline is better than pain of regret."
+
+]
+
+document.getElementById("quote").innerText=
+quotes[Math.floor(Math.random()*quotes.length)]
 
 /* countdown */
 
