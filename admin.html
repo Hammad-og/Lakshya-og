@@ -1,211 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Administration - OG Association</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;900&display=swap" rel="stylesheet">
+<title>Administration — OG Association</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Inter;
+:root{
+--gold:#d4a54a;
+--gold2:#f0c97a;
+--gold3:#8b5e2a;
+--dark:#0d0a05;
+--dark2:#1a1208;
+--dark3:#120d07;
+--glass:rgba(255,255,255,0.04);
+--glass2:rgba(212,165,74,0.08);
+--border:rgba(212,165,74,0.18);
 }
-
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
-background:#1a1208;
-color:white;
+background:var(--dark);
+color:#fff;
+font-family:'DM Sans',sans-serif;
+overflow-x:hidden;
+min-height:100vh;
 }
+canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);opacity:0.15;pointer-events:none;z-index:0;}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,#d4a54a,transparent);top:-100px;left:-150px;animation:drift1 12s ease-in-out infinite alternate;}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,#8b5e2a,transparent);bottom:-80px;right:-100px;animation:drift2 10s ease-in-out infinite alternate;}
+@keyframes drift1{0%{transform:translate(0,0);}100%{transform:translate(60px,40px);}}
+@keyframes drift2{0%{transform:translate(0,0);}100%{transform:translate(-50px,-30px);}}
+
+/* NAV */
+nav{
+position:sticky;top:0;z-index:100;
+display:flex;justify-content:space-between;align-items:center;
+padding:16px 30px;
+background:rgba(13,10,5,0.85);
+backdrop-filter:blur(20px);
+border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:'Cinzel',serif;font-size:13px;letter-spacing:3px;color:var(--gold);}
+.back-btn{
+display:inline-flex;align-items:center;gap:8px;
+padding:9px 22px;
+border-radius:50px;
+background:var(--glass);
+border:1px solid var(--border);
+text-decoration:none;
+color:var(--gold);
+font-size:12px;
+letter-spacing:1px;
+transition:.3s;
+backdrop-filter:blur(10px);
+}
+.back-btn:hover{background:var(--glass2);transform:translateX(-3px);}
 
 /* HEADER */
-.header{
+.page-header{
+position:relative;z-index:1;
 text-align:center;
-padding:60px 20px 30px;
+padding:70px 20px 50px;
 }
-
-.header h1{
-font-size:34px;
-letter-spacing:2px;
-color:#d4a54a;
-}
-
-.back-btn{
-margin-top:20px;
-display:inline-block;
-padding:12px 30px;
+.header-badge{
+display:inline-flex;align-items:center;gap:8px;
+padding:7px 18px;
 border-radius:50px;
-background:linear-gradient(135deg,#d4a54a,#8b5e2a);
-text-decoration:none;
-color:white;
-font-weight:600;
-transition:.3s;
+background:var(--glass2);
+border:1px solid var(--border);
+font-size:11px;letter-spacing:3px;
+color:var(--gold);
+margin-bottom:20px;
+backdrop-filter:blur(10px);
+animation:fade-up 0.6s ease both;
 }
-
-.back-btn:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 30px rgba(212,165,74,0.4);
+.page-header h1{
+font-family:'Cinzel',serif;
+font-size:clamp(24px,5vw,40px);
+font-weight:900;
+letter-spacing:4px;
+background:linear-gradient(160deg,#fff 0%,var(--gold2) 40%,var(--gold) 100%);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+animation:fade-up 0.6s ease 0.1s both;
+}
+.page-sub{
+margin-top:10px;
+font-size:11px;
+letter-spacing:3px;
+color:rgba(255,255,255,0.3);
+animation:fade-up 0.6s ease 0.2s both;
+}
+.header-line{
+margin:30px auto 0;
+width:80px;height:1px;
+background:linear-gradient(90deg,transparent,var(--gold),transparent);
 }
 
 /* TEAM GRID */
 .team{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:25px;
-padding:40px 20px;
+position:relative;z-index:1;
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(195px,1fr));
+gap:16px;
+padding:40px 30px 60px;
+max-width:1100px;
+margin:0 auto;
 }
 
+/* CARD */
 .card{
-background:#120d07;
-padding:25px;
-width:220px;
-border-radius:15px;
+background:var(--glass);
+border:1px solid var(--border);
+border-radius:18px;
+padding:28px 20px 22px;
 text-align:center;
-border:1px solid #ffffff14;
+backdrop-filter:blur(12px);
+transition:.35s cubic-bezier(.34,1.56,.64,1);
+animation:fade-up 0.6s ease both;
+position:relative;
+overflow:hidden;
+cursor:default;
+}
+.card::before{
+content:'';
+position:absolute;inset:0;
+background:linear-gradient(135deg,rgba(212,165,74,0.06),transparent 60%);
+opacity:0;
 transition:.3s;
 }
-
+.card:hover::before{opacity:1;}
 .card:hover{
-transform:translateY(-6px) scale(1.03);
-box-shadow:0 10px 30px rgba(212,165,74,0.25);
+transform:translateY(-8px) scale(1.02);
+border-color:rgba(212,165,74,0.38);
+box-shadow:0 16px 40px rgba(212,165,74,0.15),0 0 0 1px rgba(212,165,74,0.08);
 }
 
-.icon{
-width:75px;
-height:75px;
+/* AVATAR */
+.avatar{
+width:72px;height:72px;
 border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-margin:auto;
-margin-bottom:15px;
-border:3px solid;
-box-shadow:0 0 15px rgba(212,165,74,0.3);
+margin:0 auto 16px;
+display:flex;align-items:center;justify-content:center;
+font-size:22px;
+position:relative;
 }
-
-.icon i{
-color:white;
-font-size:26px;
+.avatar-ring{
+position:absolute;inset:-3px;
+border-radius:50%;
+border:1.5px solid;
+opacity:0.6;
+animation:spin-slow 10s linear infinite;
 }
+.avatar-ring::after{
+content:'';
+position:absolute;
+top:-3px;left:50%;
+width:5px;height:5px;
+border-radius:50%;
+transform:translateX(-50%);
+}
+@keyframes spin-slow{to{transform:rotate(360deg);}}
 
 /* COLORS */
-.gold{border-color:#d4a54a;}
-.orange{border-color:#ff7a18;}
-.blue{border-color:#3b82f6;}
-.cyan{border-color:#00eaff;}
-.pink{border-color:#ff4da6;}
-.green{border-color:#00ffa6;}
-.purple{border-color:#a855f7;}
-.red{border-color:#ef4444;}
+.c-gold .avatar{background:rgba(212,165,74,0.15);}
+.c-gold .avatar-ring{border-color:#d4a54a;}
+.c-gold .avatar-ring::after{background:#d4a54a;box-shadow:0 0 8px #d4a54a;}
+.c-gold .avatar i{color:#d4a54a;}
+.c-gold .role{color:rgba(212,165,74,0.7);}
 
-h2{
-margin:10px 0 5px;
+.c-orange .avatar{background:rgba(255,122,24,0.12);}
+.c-orange .avatar-ring{border-color:#ff7a18;}
+.c-orange .avatar-ring::after{background:#ff7a18;box-shadow:0 0 8px #ff7a18;}
+.c-orange .avatar i{color:#ff7a18;}
+.c-orange .role{color:rgba(255,122,24,0.7);}
+
+.c-blue .avatar{background:rgba(59,130,246,0.12);}
+.c-blue .avatar-ring{border-color:#3b82f6;}
+.c-blue .avatar-ring::after{background:#3b82f6;box-shadow:0 0 8px #3b82f6;}
+.c-blue .avatar i{color:#3b82f6;}
+.c-blue .role{color:rgba(59,130,246,0.7);}
+
+.c-cyan .avatar{background:rgba(0,234,255,0.10);}
+.c-cyan .avatar-ring{border-color:#00eaff;}
+.c-cyan .avatar-ring::after{background:#00eaff;box-shadow:0 0 8px #00eaff;}
+.c-cyan .avatar i{color:#00eaff;}
+.c-cyan .role{color:rgba(0,234,255,0.7);}
+
+.c-pink .avatar{background:rgba(255,77,166,0.12);}
+.c-pink .avatar-ring{border-color:#ff4da6;}
+.c-pink .avatar-ring::after{background:#ff4da6;box-shadow:0 0 8px #ff4da6;}
+.c-pink .avatar i{color:#ff4da6;}
+.c-pink .role{color:rgba(255,77,166,0.7);}
+
+.c-green .avatar{background:rgba(0,255,166,0.10);}
+.c-green .avatar-ring{border-color:#00ffa6;}
+.c-green .avatar-ring::after{background:#00ffa6;box-shadow:0 0 8px #00ffa6;}
+.c-green .avatar i{color:#00ffa6;}
+.c-green .role{color:rgba(0,255,166,0.7);}
+
+.c-purple .avatar{background:rgba(168,85,247,0.12);}
+.c-purple .avatar-ring{border-color:#a855f7;}
+.c-purple .avatar-ring::after{background:#a855f7;box-shadow:0 0 8px #a855f7;}
+.c-purple .avatar i{color:#a855f7;}
+.c-purple .role{color:rgba(168,85,247,0.7);}
+
+.c-red .avatar{background:rgba(239,68,68,0.12);}
+.c-red .avatar-ring{border-color:#ef4444;}
+.c-red .avatar-ring::after{background:#ef4444;box-shadow:0 0 8px #ef4444;}
+.c-red .avatar i{color:#ef4444;}
+.c-red .role{color:rgba(239,68,68,0.7);}
+
+.card h2{
+font-family:'Cinzel',serif;
+font-size:15px;
+font-weight:700;
+letter-spacing:2px;
+color:#fff;
+margin-bottom:6px;
+}
+.role{
+font-size:10px;
+letter-spacing:2px;
+font-weight:300;
 }
 
-p{
-font-size:13px;
-color:#aaa;
+footer{
+position:relative;z-index:1;
+text-align:center;
+padding:40px 20px;
+font-size:12px;
+color:rgba(255,255,255,0.3);
 letter-spacing:1px;
+border-top:1px solid var(--border);
 }
+footer a{color:var(--gold);text-decoration:none;}
 
+@keyframes fade-up{
+from{opacity:0;transform:translateY(24px);}
+to{opacity:1;transform:translateY(0);}
+}
+@media(max-width:600px){
+.team{padding:24px 16px 50px;gap:12px;}
+nav{padding:14px 18px;}
+}
 </style>
 </head>
-
 <body>
 
-<div class="header">
-<h1>CORE ADMINISTRATION</h1>
-<a href="index.html" class="back-btn">← Back to Site</a>
+<canvas id="canvas"></canvas>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<nav>
+  <div class="nav-logo">⚕ OG ASSOCIATION</div>
+  <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back</a>
+</nav>
+
+<div class="page-header">
+  <div class="header-badge"><i class="fas fa-shield-halved"></i>&nbsp; CORE TEAM</div>
+  <h1>CORE ADMINISTRATION</h1>
+  <p class="page-sub">THE PEOPLE BEHIND THE MISSION</p>
+  <div class="header-line"></div>
 </div>
 
 <div class="team">
 
-<div class="card">
-<div class="icon gold"><i class="fas fa-crown"></i></div>
-<h2>DARK</h2>
-<p>OWNER</p>
+  <div class="card c-gold" style="animation-delay:.05s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-crown"></i></div>
+    <h2>DARK</h2>
+    <div class="role">OWNER</div>
+  </div>
+
+  <div class="card c-orange" style="animation-delay:.1s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-chess-king"></i></div>
+    <h2>XONE</h2>
+    <div class="role">CO-FOUNDER / A.A.H</div>
+  </div>
+
+  <div class="card c-cyan" style="animation-delay:.15s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-stethoscope"></i></div>
+    <h2>EREN</h2>
+    <div class="role">CO-FOUNDER / MOD</div>
+  </div>
+
+  <div class="card c-gold" style="animation-delay:.2s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-user-tie"></i></div>
+    <h2>Star</h2>
+    <div class="role">CO-ORDINATOR / ADMIN</div>
+  </div>
+
+  <div class="card c-blue" style="animation-delay:.25s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-user-astronaut"></i></div>
+    <h2>Bristi</h2>
+    <div class="role">CO-FOUNDER / SR. ADMIN</div>
+  </div>
+
+  <div class="card c-pink" style="animation-delay:.3s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-user-doctor"></i></div>
+    <h2>TOIBA</h2>
+    <div class="role">ADMIN</div>
+  </div>
+
+  <div class="card c-green" style="animation-delay:.35s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-user-graduate"></i></div>
+    <h2>Aarushi</h2>
+    <div class="role">ADMIN</div>
+  </div>
+
+  <div class="card c-purple" style="animation-delay:.4s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-user-check"></i></div>
+    <h2>Elisha</h2>
+    <div class="role">ADMIN</div>
+  </div>
+
+  <div class="card c-cyan" style="animation-delay:.45s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-code"></i></div>
+    <h2>Saurav</h2>
+    <div class="role">DEVELOPER</div>
+  </div>
+
+  <div class="card c-red" style="animation-delay:.5s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-fire"></i></div>
+    <h2>Tanjiro</h2>
+    <div class="role">ADMIN</div>
+  </div>
+
+  <div class="card c-cyan" style="animation-delay:.55s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-user-pen"></i></div>
+    <h2>Yagami</h2>
+    <div class="role">ADMIN</div>
+  </div>
+
+  <div class="card c-orange" style="animation-delay:.6s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-brain"></i></div>
+    <h2>SATYAM</h2>
+    <div class="role">ADMIN</div>
+  </div>
+
+  <div class="card c-blue" style="animation-delay:.65s">
+    <div class="avatar"><div class="avatar-ring"></div><i class="fas fa-bolt"></i></div>
+    <h2>Aditya Verma</h2>
+    <div class="role">ADMIN</div>
+  </div>
+
 </div>
 
-<div class="card">
-<div class="icon orange"><i class="fas fa-chess-king"></i></div>
-<h2>XONE</h2>
-<p>CO-FOUNDER / A.A.H</p>
-</div>
+<footer>Made with ♥ by <a href="https://portfolio-erenn.vercel.app/">EREN</a></footer>
 
-<div class="card">
-<div class="icon cyan"><i class="fas fa-stethoscope"></i></div>
-<h2>EREN</h2>
-<p>CO-FOUNDER / MODERATOR</p>
-</div>
-
-<div class="card">
-<div class="icon gold"><i class="fas fa-user-tie"></i></div>
-<h2>Star</h2>
-<p>CO-ORDINATOR / ADMIN</p>
-</div>
-
-<div class="card">
-<div class="icon blue"><i class="fas fa-user-astronaut"></i></div>
-<h2>Bristi</h2>
-<p>CO-FOUNDER / SENIOR ADMIN</p>
-</div>
-
-<div class="card">
-<div class="icon pink"><i class="fas fa-user-doctor"></i></div>
-<h2>TOIBA</h2>
-<p>ADMIN</p>
-</div>
-
-<div class="card">
-<div class="icon green"><i class="fas fa-user-graduate"></i></div>
-<h2>Aarushi</h2>
-<p>ADMIN</p>
-</div>
-
-<div class="card">
-<div class="icon purple"><i class="fas fa-user-check"></i></div>
-<h2>Elisha</h2>
-<p>ADMIN</p>
-</div>
-
-<div class="card">
-<div class="icon cyan"><i class="fas fa-code"></i></div>
-<h2>Saurav</h2>
-<p>DEVELOPER</p>
-</div>
-  
-<div class="card">
-<div class="icon red"><i class="fas fa-fire"></i></div>
-<h2>Tanjiro</h2>
-<p>ADMIN</p>
-</div>
-
-<div class="card">
-<div class="icon cyan"><i class="fas fa-user-pen"></i></div>
-<h2>Yagami</h2>
-<p>ADMIN</p>
-</div>
-
-<div class="card">
-<div class="icon orange"><i class="fas fa-brain"></i></div>
-<h2>SATYAM</h2>
-<p>ADMIN</p>
-</div>
-
-<div class="card">
-<div class="icon blue"><i class="fas fa-bolt"></i></div>
-<h2>Aditya Verma</h2>
-<p>ADMIN</p>
-</div>
-
-</div>
-
+<script>
+const canvas=document.getElementById('canvas');
+const ctx=canvas.getContext('2d');
+let W=canvas.width=innerWidth,H=canvas.height=innerHeight;
+const particles=[];
+for(let i=0;i<55;i++){
+  particles.push({
+    x:Math.random()*W,y:Math.random()*H,
+    r:Math.random()*1.5+0.3,
+    dx:(Math.random()-.5)*0.3,
+    dy:(Math.random()-.5)*0.3,
+    o:Math.random()*0.35+0.08
+  });
+}
+function drawParticles(){
+  ctx.clearRect(0,0,W,H);
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(212,165,74,${p.o})`;
+    ctx.fill();
+    p.x+=p.dx;p.y+=p.dy;
+    if(p.x<0||p.x>W)p.dx*=-1;
+    if(p.y<0||p.y>H)p.dy*=-1;
+  });
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+window.addEventListener('resize',()=>{W=canvas.width=innerWidth;H=canvas.height=innerHeight;});
+</script>
 </body>
 </html>
