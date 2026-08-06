@@ -747,5 +747,9 @@ timer('neet','May 2 2027'); timer('main','Jan 24 2027'); timer('adv','Jun 6 2027
 const io=new IntersectionObserver(es=>{ es.forEach((e,i)=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('vis'),i*55); io.unobserve(e.target); } }); },{threshold:.06});
 document.querySelectorAll('.sec,.qsec').forEach(el=>io.observe(el));
 </script>
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
